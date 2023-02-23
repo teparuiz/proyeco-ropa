@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import GetCart from "../getcart/GetCart";
 import GetWishList from '../wishlist /GetWishList';
+import {Link} from "react-router-dom"
 
 function Products() {
   const [index, setIndex] = useState(0);
   const [showMore, setShowMore] = useState(false);
   const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState([]);
 
   let hasPrev = index > 0;
   let hasNext = index < products.length - 1;
@@ -33,6 +35,9 @@ function Products() {
   function handleMoreClick() {
     setShowMore(!showMore);
   }
+
+  function addCart(){
+    setCart([...cart, product])}
 
   let product = products[index] ? products[index] : null;
   return (
@@ -76,10 +81,22 @@ function Products() {
             >
               Next Product
             </button>
+            <ul>
+              <li>
+                <button className="btn btn-primary" onClick={addCart}>
+                  {" "}
+                  Agregar al carrito
+                </button>
+              </li>
+              <li>
+            <Link className="nav-link" to="/cart">
+            <span>
+              Ver carrito
+            </span>
+            </Link>
+              </li>
+            </ul>
           </div>
-
-         <GetWishList />
-          <GetCart setProducts={setProducts} />
         </section>
       )}
     </div>
